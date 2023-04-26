@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.gabriel.workshopmongo.domain.Post;
 import com.gabriel.workshopmongo.domain.User;
+import com.gabriel.workshopmongo.dto.AuthorDTO;
 import com.gabriel.workshopmongo.repository.PostRepository;
 import com.gabriel.workshopmongo.repository.UserRepository;
 
@@ -25,7 +26,7 @@ public class instantiation implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("DD/mm/YYYY");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		userRepository.deleteAll();
@@ -35,9 +36,11 @@ public class instantiation implements CommandLineRunner {
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("20/02/2015"), "Partiu praia!", "nao vejo a hora de colocar o pé na areia", maria);
-		Post post2 = new Post(null, sdf.parse("21/03/2015"), "Bora estudar um javinha", "vou maratonar as aulas do nelio essa madrugada", maria);
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu praia!", "nao vejo a hora de colocar o pé na areia", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bora estudar um javinha", "vou maratonar as aulas do nelio essa madrugada", new AuthorDTO(maria));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 	}
