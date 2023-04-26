@@ -43,6 +43,8 @@ public class instantiation implements CommandLineRunner {
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
+		maria.getPostes().addAll(Arrays.asList(post1, post2));
+		userRepository.save(maria);
 	}
 
 
